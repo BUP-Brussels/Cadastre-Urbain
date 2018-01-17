@@ -1,5 +1,5 @@
 {
-    "name": "ici-brussels/urbis-php",
+    "name": "bup-brussels/cadastre-urbain",
     "description": "A php class for UrbIS Geolocalization services",
     "require": {
         "guzzlehttp/guzzle": "^6.3"
