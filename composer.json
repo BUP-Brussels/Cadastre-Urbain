@@ -1,0 +1,13 @@
+{
+    "name": "ici-brussels/urbis-php",
+    "description": "A php class for UrbIS Geolocalization services",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    }
+}
