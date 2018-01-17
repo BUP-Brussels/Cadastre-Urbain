@@ -1,5 +1,5 @@
 <?php
-class Cadastre
+class Cadastre_Urbain
 {
 	const GEOSERVER_URBIS_ADM 	= "//geoservices-urbis.irisnet.be/geoserver/UrbisAdm/wms";
 	const GEOSERVER_BRUGIS 		= "http://www.mybrugis.irisnet.be/geoserver/wms";
