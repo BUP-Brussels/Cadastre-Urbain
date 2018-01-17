@@ -3,7 +3,7 @@
     "description": "Génération d'un listing de permis régionaux pour la DG Cadastre",
     "require": {
         "guzzlehttp/guzzle": "^6.3",
-        "phayes/geophp": "^1.2",
+        "phayes/geophp": "^1.2"
     },
     "license": "MIT",
     "autoload": {
