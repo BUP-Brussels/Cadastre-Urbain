@@ -53,7 +53,7 @@ class Cadastre_Urbain
 			$data[$i]['WFS'] = self::GEOSERVER_NOVA . "?service=WFS&version=2.0.0&request=GetFeature&typeName=Nova:VMNOVASPRBVIEW&outputFormat=json&cql_FILTER=S_IDDOSSIER=%27" . $data[$i]['S_IDDOSSIER'] . "%27";
 			$data[$i]['WFS_LIEN'] = "<a href=\"" . $data[$i]['WFS'] . "\">Nova</a>";
 		};
-		return $data ? ? null;
+		return $data ?? null;
 	}
 
 	public static function setPermitsMercator(string $user, string $password, string $ref = null)
@@ -94,7 +94,7 @@ class Cadastre_Urbain
 			$data['WKT'] = $geomBuilding->out('wkt');
 		};
 		
-		return $data ? ? null;
+		return $data ?? null;
 	}
 
 	public static function setParcels(string $geom = null, $crs_out = 31370, $buffer = "-0.9")
@@ -138,12 +138,12 @@ class Cadastre_Urbain
 		$nb = isset($json->features) ? count($json->features) : 0;
 		for ($i = 0; $i < $nb; $i++)
 		{
-			$data[$i]['CAPA_INSPIRE_ID'] = $json->features[$i]->properties->CAPA_INSPIRE_ID ? ? null;
-			$data[$i]['CAPA_APNC_MAPC'] = $json->features[$i]->properties->CAPA_APNC_MAPC ? ? null;
-			$data[$i]['CAPA_EXPONENT_NUM'] = $json->features[$i]->properties->CAPA_EXPONENT_NUM ? ? null;
-			$data[$i]['CAPA_EXPONENT_ALPHA'] = $json->features[$i]->properties->CAPA_EXPONENT_ALPHA ? ? null;
-			$data[$i]['CAPA_RADICAL_NUM'] = $json->features[$i]->properties->CAPA_RADICAL_NUM ? ? null;
-			$data[$i]['CAPA_CAPAKEY'] = $json->features[$i]->properties->CAPA_CAPAKEY ? ? null;
+			$data[$i]['CAPA_INSPIRE_ID'] = $json->features[$i]->properties->CAPA_INSPIRE_ID ?? null;
+			$data[$i]['CAPA_APNC_MAPC'] = $json->features[$i]->properties->CAPA_APNC_MAPC ?? null;
+			$data[$i]['CAPA_EXPONENT_NUM'] = $json->features[$i]->properties->CAPA_EXPONENT_NUM ?? null;
+			$data[$i]['CAPA_EXPONENT_ALPHA'] = $json->features[$i]->properties->CAPA_EXPONENT_ALPHA ?? null;
+			$data[$i]['CAPA_RADICAL_NUM'] = $json->features[$i]->properties->CAPA_RADICAL_NUM ?? null;
+			$data[$i]['CAPA_CAPAKEY'] = $json->features[$i]->properties->CAPA_CAPAKEY ?? null;
 			$data[$i]['WFS'] = self::GEOSERVER_URBIS_ADM . "?service=WFS&version=2.0.0&request=GetFeature&typeName=UrbisAdm%3ACapa&outputFormat=json&cql_filter=CAPA_INSPIRE_ID='" . $data[$i]['CAPA_INSPIRE_ID'] . "'";
 			$data[$i]['WFS_LIEN'] = "<a href=\"" . $data[$i]['WFS'] . "\">Parcelle</a>";
 		};
