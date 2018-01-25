@@ -68,7 +68,7 @@ class Cadastre_Urbain
 			'outputFormat' => 'json',
 			'cql_filter' => "DOCREF LIKE '%" . $ref . "'",
 		);
-		$client = new GuzzleHttpClient();
+		$client = new GuzzleHttp\Client();
 		
 		try
 		{
@@ -118,7 +118,7 @@ class Cadastre_Urbain
 			'outputFormat' => 'json',
 			'cql_filter' => "INTERSECTS(GEOM, " . $geom . ")"
 		);
-		$client = new GuzzleHttpClient();
+		$client = new GuzzleHttp\Client();
 		
 		try
 		{
