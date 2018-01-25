@@ -17,7 +17,7 @@ class Cadastre_Urbain
 			'cql_filter' => "TYPEDOSSIER IN ('PFD', 'PFU') AND DATENOTIFDECISION LIKE '%" . $annee . "'",
 			'count' => $limit
 		);
-		$client = new GuzzleHttpClient();
+		$client = new GuzzleHttp\Client();
 		
 		try
 		{
