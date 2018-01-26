@@ -53,7 +53,7 @@ class Cadastre_Urbain
 			$data[$i]['NUMBER_RANGE'] = $json->features[$i]->properties->NUMBERPARTFROM;
 			if (!is_null($json->features[$i]->properties->NUMBERPARTTO))
 			{
-				$data[$i]['NUMBER_RANGE'].= $json->features[$i]->properties->NUMBERPARTTO;
+				$data[$i]['NUMBER_RANGE'].= "-".$json->features[$i]->properties->NUMBERPARTTO;
 			};
 			$data[$i]['WFS'] = self::GEOSERVER_NOVA . "?service=WFS&version=2.0.0&request=GetFeature&typeName=Nova:VMNOVASPRBVIEW&outputFormat=json&cql_FILTER=S_IDDOSSIER=%27" . $data[$i]['S_IDDOSSIER'] . "%27";
 			$data[$i]['WFS_LIEN'] = "<a href=\"" . $data[$i]['WFS'] . "\">Nova</a>";
