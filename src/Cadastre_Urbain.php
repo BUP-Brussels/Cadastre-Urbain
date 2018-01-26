@@ -42,8 +42,13 @@ class Cadastre_Urbain
 			$data[$i]['OBJECTFR'] = $json->features[$i]->properties->OBJECTFR;
 			$data[$i]['OBJECTNL'] = $json->features[$i]->properties->OBJECTNL;
 			$data[$i]['S_IDDOSSIER'] = $json->features[$i]->properties->S_IDDOSSIER;
+			$data[$i]['RI'] = $json->features[$i]->properties->RI;
+			$data[$i]['EI'] = $json->features[$i]->properties->EI;
+			$data[$i]['ZIPCODE'] = $json->features[$i]->properties->ZIPCODE;
+			
 			$data[$i]['DATENOTIFDECISION'] = $json->features[$i]->properties->DATENOTIFDECISION ? DateTime::createFromFormat('d/m/Y', $json->features[$i]->properties->DATENOTIFDECISION)->format('Y-m-d') : null;
-
+			$data[$i]['DATEARDOSSCOMPLET'] = $json->features[$i]->properties->DATEARDOSSCOMPLET ? DateTime::createFromFormat('d/m/Y', $json->features[$i]->properties->DATEARDOSSCOMPLET)->format('Y-m-d') : null;
+			
 			// Ranges de Numéros de police
 			$data[$i]['NUMBER_RANGE'] = $json->features[$i]->properties->NUMBERPARTFROM;
 			if (!is_null($json->features[$i]->properties->NUMBERPARTTO))
