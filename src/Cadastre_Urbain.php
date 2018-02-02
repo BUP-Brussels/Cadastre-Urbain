@@ -1,11 +1,17 @@
-<?php
+<?php 
 class Cadastre_Urbain
 {
 	const GEOSERVER_URBIS_ADM = "//geoservices-urbis.irisnet.be/geoserver/UrbisAdm/wms";
 	const GEOSERVER_BRUGIS = "http://www.mybrugis.irisnet.be/geoserver/wms";
 	const GEOSERVER_NOVA = "//geoservices-others.irisnet.be/geoserver/Nova/ows";
-	const TIMEOUT = 10;	public static function setPermitsNova(int $limit = 5, int $annee = 2016)
+	const TIMEOUT = 10;	
+	
+	public static function setPermitsNova($cql_filter = null, $limit = null)
 	{
+		$cql_filter = $cql_filter ?? "TYPEDOSSIER IN ('PFD', 'PFU')";
+		$limit 		= $limit ?? 100;
+		$orderBy 	= 'S_IDDOSSIER D';
+		
 		$url = self::GEOSERVER_NOVA;
 		$fields = array(
 			'service' => 'WFS',
@@ -14,7 +20,8 @@ class Cadastre_Urbain
 			'typeName' => 'Nova:VMNOVASPRBVIEW',
 			'srsName' => 'EPSG:31370',
 			'outputFormat' => 'json',
-			'cql_filter' => "TYPEDOSSIER IN ('PFD', 'PFU') AND DATENOTIFDECISION LIKE '%" . $annee . "'",
+			'cql_filter' => $cql_filter,
+			'sortBy' => $orderBy,
 			'count' => $limit
 		);
 		$client = new GuzzleHttp\Client();
@@ -45,9 +52,10 @@ class Cadastre_Urbain
 			$data[$i]['RI'] = $json->features[$i]->properties->RI;
 			$data[$i]['EI'] = $json->features[$i]->properties->EI;
 			$data[$i]['ZIPCODE'] = $json->features[$i]->properties->ZIPCODE;
+			$data[$i]['LOCKTIME'] = $json->features[$i]->properties->LOCKTIME ? DateTime::createFromFormat('Y-m-d', substr($json->features[$i]->properties->LOCKTIME,0,-1))->format('d-m-y') : null;
 			
-			$data[$i]['DATENOTIFDECISION'] = $json->features[$i]->properties->DATENOTIFDECISION ? DateTime::createFromFormat('d/m/Y', $json->features[$i]->properties->DATENOTIFDECISION)->format('Y-m-d') : null;
-			$data[$i]['DATEARDOSSCOMPLET'] = $json->features[$i]->properties->DATEARDOSSCOMPLET ? DateTime::createFromFormat('d/m/Y', $json->features[$i]->properties->DATEARDOSSCOMPLET)->format('Y-m-d') : null;
+			$data[$i]['DATENOTIFDECISION'] = $json->features[$i]->properties->DATENOTIFDECISION ? DateTime::createFromFormat('d/m/Y', $json->features[$i]->properties->DATENOTIFDECISION)->format('d-m-y') : null;
+			$data[$i]['DATEARDOSSCOMPLET'] = $json->features[$i]->properties->DATEARDOSSCOMPLET ? DateTime::createFromFormat('d/m/Y', $json->features[$i]->properties->DATEARDOSSCOMPLET)->format('d-m-y') : null;
 			
 			// Ranges de Numéros de police
 			$data[$i]['NUMBER_RANGE'] = $json->features[$i]->properties->NUMBERPARTFROM;
@@ -156,3 +164,4 @@ class Cadastre_Urbain
 		return $data;
 	}
 };
+
