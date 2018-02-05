@@ -52,6 +52,7 @@ class Cadastre_Urbain
 			$data[$i]['RI'] = $json->features[$i]->properties->RI;
 			$data[$i]['EI'] = $json->features[$i]->properties->EI;
 			$data[$i]['ZIPCODE'] = $json->features[$i]->properties->ZIPCODE;
+			$data[$i]['STATUT'] = $json->features[$i]->properties->STATUTPERMISFR;
 			$data[$i]['LOCKTIME'] = $json->features[$i]->properties->LOCKTIME ? DateTime::createFromFormat('Y-m-d', substr($json->features[$i]->properties->LOCKTIME,0,-1))->format('d-m-y') : null;
 			
 			$data[$i]['DATENOTIFDECISION'] = $json->features[$i]->properties->DATENOTIFDECISION ? DateTime::createFromFormat('d/m/Y', $json->features[$i]->properties->DATENOTIFDECISION)->format('d-m-y') : null;
