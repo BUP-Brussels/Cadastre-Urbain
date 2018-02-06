@@ -158,6 +158,8 @@ class Cadastre_Urbain
 			$data[$i]['CAPA_EXPONENT_ALPHA'] = $json->features[$i]->properties->CAPA_EXPONENT_ALPHA ?? null;
 			$data[$i]['CAPA_RADICAL_NUM'] = $json->features[$i]->properties->CAPA_RADICAL_NUM ?? null;
 			$data[$i]['CAPA_CAPAKEY'] = $json->features[$i]->properties->CAPA_CAPAKEY ?? null;
+			$data[$i]['CAPA_CD5C'] = $json->features[$i]->properties->CAPA_CD5C ?? null;
+			$data[$i]['CAPA_CSNC'] = $json->features[$i]->properties->CAPA_CSNC ?? null;
 			$data[$i]['WFS'] = self::GEOSERVER_URBIS_ADM . "?service=WFS&version=2.0.0&request=GetFeature&typeName=UrbisAdm%3ACapa&outputFormat=json&cql_filter=CAPA_INSPIRE_ID='" . $data[$i]['CAPA_INSPIRE_ID'] . "'";
 			$data[$i]['WFS_LIEN'] = "<a href=\"" . $data[$i]['WFS'] . "\">Parcelle</a>";
 		};
