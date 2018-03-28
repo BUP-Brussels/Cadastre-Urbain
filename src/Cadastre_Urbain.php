@@ -175,7 +175,7 @@ class Cadastre_Urbain
 			'version' => '2.0.0',
 			'request' => 'GetFeature',
 			'typeName' => 'UrbisAdm:Pw',
-			'srsName' => 'EPSG:' . $crs_out,
+			'srsName' => 'EPSG:31370',
 			'outputFormat' => 'json',
 			'propertyname' => 'PN_PNMC,MZ_NATIONAL_CODE,PN_NAME_FRE,PN_NAME_DUT',
 			'cql_filter' => "PN_NAME_FRE='".$streetname."' AND MZ_NATIONAL_CODE '".$zipcode."'"
@@ -184,7 +184,7 @@ class Cadastre_Urbain
 		
 		try
 		{
-			$response = $client->request('GET', $url . "?" . http_build_query($fields) , ['timeout' => self::TIMEOUT, 'auth' => [$user, $password]]);
+			$response = $client->request('GET', $url . "?" . http_build_query($fields) , ['timeout' => self::TIMEOUT]);
 			$json = json_decode((string)$response->getBody());
 		}
 		catch(Exception $e)
