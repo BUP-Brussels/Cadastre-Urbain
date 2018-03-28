@@ -178,7 +178,7 @@ class Cadastre_Urbain
 			'srsName' => 'EPSG:31370',
 			'outputFormat' => 'json',
 			'propertyname' => 'PN_PNMC,MZ_NATIONAL_CODE,PN_NAME_FRE,PN_NAME_DUT',
-			'cql_filter' => "PN_NAME_FRE='".$streetname."' AND MZ_NATIONAL_CODE '".$zipcode."'"
+			'cql_filter' => "(PN_NAME_FRE='".$streetname."' AND MZ_NATIONAL_CODE='".$zipcode."')"
 		);
 		$client = new GuzzleHttp\Client();
 		
@@ -192,9 +192,10 @@ class Cadastre_Urbain
 			return 'timeout';
 		}
 
+
 		$nb = isset($json->features) ? count($json->features) : 0;
 		$data = $json->features[0]->properties->MZ_NATIONAL_CODE.$json->features[0]->properties->PN_PNMC;
-		
+
 		return $data ?? null;
 	}
 };
