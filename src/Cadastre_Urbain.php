@@ -166,5 +166,36 @@ class Cadastre_Urbain
 		
 		return $data;
 	}
+	
+		public static function setPWNC(string $streetname, int $zipcode)
+	{
+		$url = self::GEOSERVER_URBIS_ADM;
+		$fields = array(
+			'service' => 'WFS',
+			'version' => '2.0.0',
+			'request' => 'GetFeature',
+			'typeName' => 'UrbisAdm:Pw',
+			'srsName' => 'EPSG:' . $crs_out,
+			'outputFormat' => 'json',
+			'propertyname' => 'PN_PNMC,MZ_NATIONAL_CODE,PN_NAME_FRE,PN_NAME_DUT',
+			'cql_filter' => "PN_NAME_FRE='".$streetname."' AND MZ_NATIONAL_CODE '".$zipcode."'"
+		);
+		$client = new GuzzleHttp\Client();
+		
+		try
+		{
+			$response = $client->request('GET', $url . "?" . http_build_query($fields) , ['timeout' => self::TIMEOUT, 'auth' => [$user, $password]]);
+			$json = json_decode((string)$response->getBody());
+		}
+		catch(Exception $e)
+		{
+			return 'timeout';
+		}
+
+		$nb = isset($json->features) ? count($json->features) : 0;
+		$data = $json->features[0]->properties->MZ_NATIONAL_CODE.$json->features[0]->properties->PN_PNMC;
+		
+		return $data ?? null;
+	}
 };
 
