@@ -178,7 +178,7 @@ class Cadastre_Urbain
 			'srsName' => 'EPSG:31370',
 			'outputFormat' => 'json',
 			'propertyname' => 'PN_PNMC,MZ_NATIONAL_CODE,PN_NAME_FRE,PN_NAME_DUT',
-			'cql_filter' => "(PN_NAME_FRE='".$streetname."' AND MZ_NATIONAL_CODE='".$zipcode."')"
+			'cql_filter' => "(PN_NAME_FRE='".str_replace("'", "''", $streetname)."' AND MZ_NATIONAL_CODE='".$zipcode."')"
 		);
 		$client = new GuzzleHttp\Client();
 		
