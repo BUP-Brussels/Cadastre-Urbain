@@ -2,7 +2,7 @@
 class Cadastre_Urbain
 {
 	const GEOSERVER_URBIS_ADM = "//geoservices-urbis.irisnet.be/geoserver/UrbisAdm/wms";
-	const GEOSERVER_BRUGIS = "//www.mybrugis.irisnet.be/geoserver/wms";
+	const GEOSERVER_BRUGIS = "//mybrugis.irisnet.be/geoserver/wms";
 	const GEOSERVER_NOVA = "//geoservices-others.irisnet.be/geoserver/Nova/ows";
 	const TIMEOUT = 10;	
 	
